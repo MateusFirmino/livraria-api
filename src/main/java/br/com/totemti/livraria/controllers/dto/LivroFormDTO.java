@@ -1,10 +1,8 @@
-package br.com.totemti.livraria.dto;
-
-import br.com.totemti.livraria.models.Autor;
+package br.com.totemti.livraria.controllers.dto;
 
 import java.util.List;
 
-public class LivroDTO {
+public class LivroFormDTO {
 
     private Long id;
 
@@ -12,26 +10,24 @@ public class LivroDTO {
 
     private String descricao;
 
-    private EditoraDTO editora;
+    private Long editora;
 
-    private List<AutorDTO> autores;
+    private List<Long> autores;
 
     public Long getId() {
         return id;
     }
 
-    public LivroDTO setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public LivroDTO setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
-        return this;
     }
 
     public String getDescricao() {
@@ -42,19 +38,19 @@ public class LivroDTO {
         this.descricao = descricao;
     }
 
-    public EditoraDTO getEditora() {
+    public Long getEditora() {
         return editora;
     }
 
-    public void setEditora(EditoraDTO editora) {
+    public void setEditora(Long editora) {
         this.editora = editora;
     }
 
-    public List<AutorDTO> getAutores() {
+    public List<Long> getAutores() {
         return autores;
     }
 
-    public void setAutores(List<AutorDTO> autores) {
+    public void setAutores(List<Long> autores) {
         this.autores = autores;
     }
 }

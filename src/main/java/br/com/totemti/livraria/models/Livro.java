@@ -57,7 +57,7 @@ public class Livro extends Entidade {
         if (autores == null) {
             Collections.emptySet();
         }
-        return autores;
+        return Collections.unmodifiableSet(autores);
     }
 
     public void incluirAutor(Autor autor){

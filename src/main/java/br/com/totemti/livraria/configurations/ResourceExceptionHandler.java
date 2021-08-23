@@ -1,6 +1,6 @@
 package br.com.totemti.livraria.configurations;
 
-import br.com.totemti.livraria.dto.ErroDTO;
+import br.com.totemti.livraria.controllers.dto.ErroDTO;
 import br.com.totemti.livraria.exceptions.RegistroNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

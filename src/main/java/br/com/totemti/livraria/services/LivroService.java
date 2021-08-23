@@ -1,6 +1,5 @@
 package br.com.totemti.livraria.services;
 
-import br.com.totemti.livraria.dto.LivroDTO;
 import br.com.totemti.livraria.exceptions.RegistroNaoEncontradoException;
 import br.com.totemti.livraria.models.Livro;
 import br.com.totemti.livraria.repositories.LivroRepository;

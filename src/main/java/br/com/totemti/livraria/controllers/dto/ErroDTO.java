@@ -1,4 +1,4 @@
-package br.com.totemti.livraria.dto;
+package br.com.totemti.livraria.controllers.dto;
 
 public class ErroDTO {
 

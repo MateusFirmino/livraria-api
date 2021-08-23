@@ -1,7 +1,8 @@
 package br.com.totemti.livraria.controllers;
 
-import br.com.totemti.livraria.dto.AutorDTO;
-import br.com.totemti.livraria.dto.LivroDTO;
+import br.com.totemti.livraria.controllers.dto.AutorDTO;
+import br.com.totemti.livraria.controllers.dto.LivroDTO;
+import br.com.totemti.livraria.controllers.dto.LivroFormDTO;
 import br.com.totemti.livraria.models.Editora;
 import br.com.totemti.livraria.models.Livro;
 import br.com.totemti.livraria.services.AutorService;
@@ -15,6 +16,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/livros")
@@ -55,26 +59,28 @@ public class LivroController {
 
     @Transactional    // spring gerenciar caso tenha algum erro no fluxo. EX: se teve algum alter ou inclusao , ele faz um rollback
     @PostMapping
-    public ResponseEntity<LivroDTO> store(@RequestBody LivroDTO livroDTO){
-        Livro livro = modelMapper.map(livroDTO, Livro.class);
-        atribuirEditora(livro,livroDTO);
-        atribuirAutores(livro,livroDTO);
+    public ResponseEntity<LivroDTO> store(@RequestBody LivroFormDTO livroFormDTO, UriComponentsBuilder uriComponentsBuilder){
+        Livro livro = modelMapper.map(livroFormDTO, Livro.class);
+        atribuirEditora(livro,livroFormDTO);
+        atribuirAutores(livro,livroFormDTO);
 
         LivroDTO novoLivro = modelMapper.map(livroService.salvar(livro),LivroDTO.class);
 
-        return ResponseEntity.ok(novoLivro);
+        URI uri = uriComponentsBuilder.path("/livros/{id}").buildAndExpand(novoLivro.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(novoLivro);
     }
 
-    private void atribuirAutores(Livro livro, LivroDTO livroDTO) {
-        if(livroDTO.getAutores() != null && !livroDTO.getAutores().isEmpty()){  // verificar se o user enviou autor
-            for(AutorDTO autorDTO: livroDTO.getAutores()){
-                livro.incluirAutor(autorService.buscar(autorDTO.getId()));
+    private void atribuirAutores(Livro livro, LivroFormDTO livroFormDTO) {
+        if(livroFormDTO.getAutores() != null && !livroFormDTO.getAutores().isEmpty()){  // verificar se o user enviou autor
+            for(Long autor : livroFormDTO.getAutores()){
+                livro.incluirAutor(autorService.buscar(autor));
             }
         }
     }
 
-    private void atribuirEditora(Livro livro, LivroDTO livroDTO) {
-        Editora editora = editoraService.buscar(livroDTO.getEditora().getId()); // pegar id da editora
+    private void atribuirEditora(Livro livro, LivroFormDTO livroFormDTO) {
+        Editora editora = editoraService.buscar(livroFormDTO.getEditora()); // pegar id da editora
         livro.setEditora(editora);
     }
 }

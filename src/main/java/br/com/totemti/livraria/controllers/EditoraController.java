@@ -1,6 +1,6 @@
 package br.com.totemti.livraria.controllers;
 
-import br.com.totemti.livraria.dto.EditoraDTO;
+import br.com.totemti.livraria.controllers.dto.EditoraDTO;
 import br.com.totemti.livraria.models.Editora;
 import br.com.totemti.livraria.services.EditoraService;
 import org.modelmapper.ModelMapper;

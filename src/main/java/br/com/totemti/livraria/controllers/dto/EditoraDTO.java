@@ -1,6 +1,6 @@
-package br.com.totemti.livraria.dto;
+package br.com.totemti.livraria.controllers.dto;
 
-public class AutorDTO {
+public class EditoraDTO {
 
     private Long id;
 
@@ -10,7 +10,7 @@ public class AutorDTO {
         return id;
     }
 
-    public AutorDTO setId(Long id) {
+    public EditoraDTO setId(Long id) {
         this.id = id;
         return this;
     }
@@ -19,7 +19,7 @@ public class AutorDTO {
         return nome;
     }
 
-    public AutorDTO setNome(String nome) {
+    public EditoraDTO setNome(String nome) {
         this.nome = nome;
         return this;
     }
