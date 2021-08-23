@@ -1,0 +1,8 @@
+${AnsiColor.MAGENTA}.__  .__                           .__
+${AnsiColor.MAGENTA}|  | |__|__  ______________ _______|__|____
+${AnsiColor.MAGENTA}|  | |  \  \/ /\_  __ \__  \\_  __ \  \__  \
+${AnsiColor.MAGENTA}|  |_|  |\   /  |  | \// __ \|  | \/  |/ __ \_
+${AnsiColor.MAGENTA}|____/__| \_/   |__|  (____  /__|  |__(____  /
+${AnsiColor.MAGENTA}                           \/              \/
+
+${AnsiColor.BRIGHT_YELLOW} Projeto exemplo de uma API REST com Spring Boot
