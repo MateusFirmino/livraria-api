@@ -4,11 +4,22 @@ public class ErroDTO {
 
     private String erro;
 
+    private String propriedade;
+
     public ErroDTO(String erro) {
         this.erro = erro;
     }
 
-    public String getErro(){
+    public ErroDTO(String erro, String propriedade) {
+        this.erro = erro;
+        this.propriedade = propriedade;
+    }
+
+    public String getErro() {
         return erro;
+    }
+
+    public String getPropriedade() {
+        return propriedade;
     }
 }

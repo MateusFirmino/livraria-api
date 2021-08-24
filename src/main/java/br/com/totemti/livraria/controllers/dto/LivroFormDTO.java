@@ -1,13 +1,18 @@
 package br.com.totemti.livraria.controllers.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class LivroFormDTO {
 
     private Long id;
 
+    @NotNull
+    @Size(min = 3, max = 100)
     private String nome;
 
+    @NotNull
     private String descricao;
 
     private Long editora;

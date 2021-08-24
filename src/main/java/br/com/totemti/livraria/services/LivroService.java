@@ -32,4 +32,9 @@ public class LivroService {
         return livroRepository.save(livro);
 
     }
+
+    public void excluir(Long id) {
+        Livro livro = buscar(id);
+        livroRepository.delete(livro);
+    }
 }

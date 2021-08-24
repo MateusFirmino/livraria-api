@@ -10,6 +10,8 @@ import br.com.totemti.livraria.services.EditoraService;
 import br.com.totemti.livraria.services.LivroService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -38,6 +41,7 @@ public class LivroController {
         this.editoraService = editoraService;
     }
 
+    @Cacheable(value = "livros")
     @GetMapping
     public ResponseEntity<Page<LivroDTO>> index(@PageableDefault(sort = "nome") Pageable pageable) {
         Page livros = livroService
@@ -57,9 +61,10 @@ public class LivroController {
 
     }
 
+    @CacheEvict(value = "livros",allEntries = true)
     @Transactional    // spring gerenciar caso tenha algum erro no fluxo. EX: se teve algum alter ou inclusao , ele faz um rollback
     @PostMapping
-    public ResponseEntity<LivroDTO> store(@RequestBody LivroFormDTO livroFormDTO, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<LivroDTO> store(@RequestBody @Valid LivroFormDTO livroFormDTO, UriComponentsBuilder uriComponentsBuilder){
         Livro livro = modelMapper.map(livroFormDTO, Livro.class);
         atribuirEditora(livro,livroFormDTO);
         atribuirAutores(livro,livroFormDTO);
@@ -69,6 +74,28 @@ public class LivroController {
         URI uri = uriComponentsBuilder.path("/livros/{id}").buildAndExpand(novoLivro.getId()).toUri();
 
         return ResponseEntity.created(uri).body(novoLivro);
+    }
+
+    @CacheEvict(value = "livros",allEntries = true)
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity<LivroDTO> update(@PathVariable Long id, @RequestBody @Valid LivroFormDTO livroFormDTO){
+        Livro livro = modelMapper.map(livroFormDTO, Livro.class);
+        livro.setId(id);
+        atribuirEditora(livro,livroFormDTO);
+        atribuirAutores(livro,livroFormDTO);
+
+        LivroDTO novoLivro = modelMapper.map(livroService.salvar(livro),LivroDTO.class);
+
+        return ResponseEntity.ok(novoLivro);
+    }
+
+    @CacheEvict(value = "livros",allEntries = true)
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        livroService.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 
     private void atribuirAutores(Livro livro, LivroFormDTO livroFormDTO) {
