@@ -35,4 +35,4 @@ As seguintes ferramentas foram usadas na construção do projeto:
 * Crie uma base de dados
 * Execute o script `src/main/resources/script/setup.sql`
 * Execute o script `src/main/resources/script/setupLogin.sql` para Base de Login
-* Edite o arquivo src/main/resources/application.properties com os dados do seu ambiente
+* Edite o arquivo `src/main/resources/application.properties` com os dados do seu ambiente
