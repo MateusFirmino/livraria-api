@@ -25,7 +25,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Spring Boot 2.3.1](https://spring.io/projects/spring-boot)
 
 
-### Recursos
+### 🚀 Recursos
 * Database Pagination
 * Segurança por Token
 * Caching
