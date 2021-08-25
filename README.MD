@@ -1,7 +1,5 @@
 <h1 align="center">Livraria</h1>
-<h1 align="center">
-    <a href="https://spring.io/projects/spring-boot">🔗 Spring Boot</a>
-</h1>
+
 <p align="center">🚀 Livraria é um projeto de uma API REST desenvolvido em Java com Spring Boot</p>
 
 <h4 align="center"> 
@@ -9,7 +7,7 @@
 </h4>
 
 <h2 align="center">
-  <img alt="Swagger" title="Swagger" src="src/main/resources/assets/swagger.png" />
+  <img alt="Swagger" title="Swagger" src="src/main/resources/assets/Screenshot_8.png" />
 </h2>
 
 
