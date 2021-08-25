@@ -13,7 +13,7 @@
 
 ### Features
 
-- [ ] Frontend 
+- [ ] Front-end  
 - [ ] ???
 
 ### 🛠 Tecnologias
